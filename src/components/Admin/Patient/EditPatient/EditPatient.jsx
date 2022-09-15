@@ -1,8 +1,9 @@
+import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const UpdatePatientComponent = () => {
-  const [id, setId] = useState("");
+const EditPatient = () => {
+  const [pid, setPId] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,7 +14,26 @@ const UpdatePatientComponent = () => {
   const [address, setAddress] = useState("");
 
   let navigate = useNavigate();
-  //console.log('name' + firstName);
+  const { id } = useParams();
+
+  const updatePatient = () => {
+    axios
+      .put("http://localhost:8080/api/patients", {
+        id,
+        firstName,
+        lastName,
+        email,
+        password,
+        aadhar,
+        dob,
+        mobile,
+        address,
+      })
+      .then((res) => {
+        console.log(res.data);
+        navigate("/admin/patient");
+      });
+  };
   return (
     <div>
       <div className="container">
@@ -28,9 +48,11 @@ const UpdatePatientComponent = () => {
                 <div className="from-group">
                   <label> Patient ID: </label>
                   <input
+                    type="text"
                     placeholder="Patient Id"
                     className="form-control"
-                    onChange={(value) => setId(value)}
+                    onChange={(e) => setPId(e.target.value)}
+                    value={id}
                   />
 
                   <div style={{ display: "flex", flexDirection: "center" }}>
@@ -41,62 +63,78 @@ const UpdatePatientComponent = () => {
                     style={{ display: "flex", flexDirection: "space-between" }}
                   >
                     <input
+                      type="text"
                       placeholder="First Name"
                       className="form-control shadow-sm"
-                      onChange={(value) => setFirstName(value)}
+                      onChange={(e) => setFirstName(e.target.value)}
                     />
                     <input
+                      type="text"
                       placeholder="Last Name"
                       className="form-control shadow-sm"
                       style={{ marginLeft: "10px" }}
-                      onChange={(value) => setLastName(value)}
+                      onChange={(e) => setLastName(e.target.value)}
                     />
                   </div>
 
                   <label> Email ID: </label>
                   <input
+                    type="email"
                     placeholder="Email ID"
                     className="form-control"
-                    onChange={(value) => setEmail(value)}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
 
                   <label> Password: </label>
                   <input
+                    type="password"
                     placeholder="Password"
                     className="form-control"
-                    onChange={(value) => setPassword(value)}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
 
                   <label> Aadhar Number: </label>
                   <input
+                    type="text"
                     placeholder="Aadhar Number"
                     className="form-control"
-                    onChange={(value) => setAadhar(value)}
+                    onChange={(e) => setAadhar(e.target.value)}
                   />
 
                   <label> Date of Birth: </label>
                   <input
+                    type="date"
                     placeholder="d.o.b."
                     className="form-control"
-                    onChange={(value) => setDob(value)}
+                    onChange={(e) => setDob(e.target.value)}
                   />
 
                   <label> Mobile: </label>
                   <input
+                    type="tel"
                     placeholder="Mobile"
                     className="form-control"
-                    onChange={(value) => setMobile(value)}
+                    onChange={(e) => setMobile(e.target.value)}
                   />
 
                   <label> Address: </label>
                   <input
+                    type="text"
                     placeholder="Address"
                     className="form-control"
-                    onChange={(value) => setAddress(value)}
+                    onChange={(e) => setAddress(e.target.value)}
                   />
 
                   <div style={{ marginTop: 15 }}>
-                    <button className="btn btn-success">SAVE</button>
+                    <button
+                      className="btn btn-success"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        updatePatient();
+                      }}
+                    >
+                      SAVE
+                    </button>
                     <button
                       className="btn btn-danger"
                       style={{ marginLeft: "20px" }}
@@ -115,4 +153,4 @@ const UpdatePatientComponent = () => {
   );
 };
 
-export default UpdatePatientComponent;
+export default EditPatient;

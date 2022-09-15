@@ -16,6 +16,7 @@ import AddDoctor from "./components/Admin/Doctor/AddDoctor/AddDoctor";
 import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
 import { useState } from "react";
+import HomePage from "./Pages/HomePage";
 
 function App() {
   const [user, setUser] = useState({});
@@ -24,12 +25,13 @@ function App() {
       <div>
         <HeaderComponent />
         <Routes>
-          <Route path="/" element={<Navigate to="/admin/patient" />} />
+          <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/signup" element={<Signup />}></Route>
           <Route
             path="/login"
             element={<Login user={user} setUser={setUser} />}
           ></Route>
+          <Route path="/home" element={<HomePage />}></Route>
           <Route path="/admin" element={<Admin user={user} />}></Route>
           <Route path="/admin/profile" element={<Admin user={user} />}></Route>
           <Route path="/admin/patient" element={<Admin user={user} />}></Route>

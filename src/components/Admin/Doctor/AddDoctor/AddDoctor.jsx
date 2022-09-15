@@ -32,6 +32,9 @@ const AddDoctor = () => {
       .then((res) => {
         console.log(res.data);
         navigate("/admin/doctor");
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
   console.log(firstName);

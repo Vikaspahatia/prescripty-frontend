@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import { useParams } from "react-router";
 import Patient from "./Patient/Patient";
+import Doctor from "./Doctor/Doctor";
 
 export default function Admin(props) {
   const [key, setKey] = useState(props.tabKey);
@@ -30,7 +31,7 @@ export default function Admin(props) {
           <Patient />
         </Tab>
         <Tab eventKey="doctor" title="Doctor">
-          <div>Doctor here!</div>
+          <Doctor />
         </Tab>
       </Tabs>
     </div>

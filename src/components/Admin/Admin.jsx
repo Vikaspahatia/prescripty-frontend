@@ -3,15 +3,10 @@ import { Tab, Tabs } from "react-bootstrap";
 import { useParams } from "react-router";
 import Patient from "./Patient/Patient";
 import Doctor from "./Doctor/Doctor";
+import Profile from "./Profile/Profile";
 
 export default function Admin(props) {
   const [key, setKey] = useState(props.tabKey);
-  // const { page, action, id } = useParams();
-  // const [currentPage, setCurrentPage] = useState(page);
-  // const [currentAction, setCurrentAction] = useState(action);
-  // const [currentId, setCurrentId] = useState(id);
-  // const [patientId, setPatientId] = useState(0);
-  // const [doctorId, setDoctorId] = useState(0);
 
   useEffect(() => {
     // setKey(props.tabKey);
@@ -25,7 +20,7 @@ export default function Admin(props) {
         className="mb-3"
       >
         <Tab eventKey="profile" title="Profile">
-          <div>Profile here!</div>
+          <Profile admin={props.user} />
         </Tab>
         <Tab eventKey="patient" title="Patient">
           <Patient />

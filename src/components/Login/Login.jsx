@@ -1,7 +1,32 @@
+import axios from "axios";
 import React, { useState } from "react";
-const Login = () => {
+import { useNavigate } from "react-router";
+
+const Login = ({ user, setUser }) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [errorMsg, setErrorMsg] = useState("");
+  const navigate = useNavigate();
+  const login = () => {
+    axios
+      .post("http://localhost:8080/api/login", {
+        email,
+        password,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.status != null && res.data.status == 200) {
+          setUser(res.data.result);
+          navigate("/admin/profile");
+        } else {
+          setErrorMsg("Invalid Credentials");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setErrorMsg("Invalid Credentials");
+      });
+  };
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div class="row">
@@ -29,7 +54,7 @@ const Login = () => {
                 type="text"
                 class="form-control"
                 placeholder="Username"
-                onClick={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
           </div>
@@ -42,13 +67,14 @@ const Login = () => {
                 </span>
               </div>
               <input
-                type="text"
+                type="password"
                 class="form-control"
                 placeholder="Password"
-                onClick={(e) => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
           </div>
+          <div className="error-container">{errorMsg}</div>
           <div class="form-group">
             <div
               class="row"
@@ -65,12 +91,17 @@ const Login = () => {
                 style={{ width: "96.8%" }}
                 class="form-control btn btn-success btn-lg "
                 value="LOG IN"
+                onClick={(e) => {
+                  console.log(email, password);
+                  e.preventDefault();
+                  login();
+                }}
               />
             </div>
           </div>
           <div class="form-group">
             <span>
-              New user? <a href="/register">Register here</a>
+              New user? <a href="/signup">Register here</a>
             </span>
           </div>
         </form>

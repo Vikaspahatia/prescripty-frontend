@@ -53,6 +53,7 @@
   flex-direction: column;
 
   width: 100vw;
+  padding: 50px;
 }
 
 .our-container .field-container {

@@ -17,8 +17,6 @@ function App() {
       <div>
         <HeaderComponent />
         <Routes>
-          {/* <Route path="/" exact element={<PatientList />}></Route>
-          <Redirect from="/" to="/api" /> */}
           <Route path="/" element={<Navigate to="/admin/patient" />} />
           <Route path="/admin" element={<Admin tabKey={"profile"} />}></Route>
           <Route

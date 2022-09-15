@@ -10,6 +10,9 @@ import Admin from "./components/Admin/Admin";
 import EditPatient from "./components/Admin/Patient/EditPatient/EditPatient";
 import ViewPatient from "./components/Admin/Patient/ViewPatient/ViewPatient";
 import AddPatient from "./components/Admin/Patient/AddPatient/AddPatient";
+import EditDoctor from "./components/Admin/Doctor/EditDoctor/EditDoctor";
+import ViewDoctor from "./components/Admin/Doctor/ViewDoctor/ViewDoctor";
+import AddDoctor from "./components/Admin/Doctor/AddDoctor/AddDoctor";
 
 function App() {
   return (
@@ -41,6 +44,15 @@ function App() {
           <Route
             path="/admin/patient/edit/:id"
             element={<EditPatient />}
+          ></Route>
+          <Route path="/admin/doctor/add" element={<AddDoctor />}></Route>
+          <Route
+            path="/admin/doctor/view/:id"
+            element={<ViewDoctor />}
+          ></Route>
+          <Route
+            path="/admin/doctor/edit/:id"
+            element={<EditDoctor />}
           ></Route>
         </Routes>
 
